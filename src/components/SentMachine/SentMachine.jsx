@@ -63,9 +63,9 @@ const SentMachine = () => {
   //   );
 
   const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbwuV7jpPBbsRCe_6Clke9jfkk32GStqyzaCve0jK1qlPcyfBNW3NG-GB7dE12UiZH7E/exec";
-  const SHEET_Id = "1-j3ydNhMDwa-SfvejOH15ow7ZZ10I1zwdV4acAirHe4";
-  const FOLDER_ID = "1ZOuHUXUjONnHb4TBWqztjQcI5Pjvy_n0";
+    "https://script.google.com/macros/s/AKfycbyhwtiwuHt7AChxyjQIhC7In30ke5Q247ZAd8DlZx4AfAHrNVetofkf2r4ThSPNJN3eeQ/exec";
+  const SHEET_Id = "1JHpW04BG2MOna3iEEfaMkN3tVFM3s3baAKLLT5iD6BM";
+  const FOLDER_ID = "1ymXMkYIPJk1A9r-2a1tBZ_eC81rZa89B";
 
   const fetchAllTasks = async () => {
     // console.log("selectedTaskType", selectedTaskType);
@@ -207,23 +207,30 @@ const SentMachine = () => {
         imageUrl = await uploadFileToDrive(formData.transportingImage);
       }
 
-      const payload = {
-        action: "update1",
-        sheetName: "Repair System", // use your actual sheet name
-        taskNo: selectedTask.taskNo,
-        Actual: new Date().toLocaleString("en-GB", {
-          timeZone: "Asia/Kolkata",
-        }), // example: 29/07/2025, 12:44:00
-        "Vendor Name": formData.vendorName,
-        "(Transporter Name)": formData.transporterName,
-        "Transportation Charges": formData.transportationCharges,
-        "Weighment Slip": formData.weighmentSlip,
-        "Transporting Image With Machine": imageUrl,
-        "Lead Time To Deliver ( In No. Of Days)": formData.leadTimeToDeliver,
-        "Payment Type": formData.paymentType, // Add this
-        "How Much":
-          formData.paymentType === "Advance" ? formData.advancePayment : "", // Add this
-      };
+    const payload = {
+  action: "update1",
+  sheetName: "Repair System",
+  taskNo: selectedTask.taskNo,
+
+  Actual: new Date().toLocaleString("en-GB", {
+    timeZone: "Asia/Kolkata",
+  }),
+
+  // 👇 header जैसा ही key लिखो ("Actual 1")
+  "Actual 1": new Date().toLocaleDateString("en-GB", {
+    timeZone: "Asia/Kolkata",
+  }),
+
+  "Vendor Name": formData.vendorName,
+  "(Transporter Name)": formData.transporterName,
+  "Transportation Charges": formData.transportationCharges,
+  "Weighment Slip": formData.weighmentSlip,
+  "Transporting Image With Machine": imageUrl,
+  "Lead Time To Deliver ( In No. Of Days)": formData.leadTimeToDeliver,
+  "Payment Type": formData.paymentType,
+  "How Much": formData.paymentType === "Advance" ? formData.advancePayment : "",
+};
+      console.log("payload", payload);
 
       const response = await fetch(SCRIPT_URL, {
         method: "POST",

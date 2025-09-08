@@ -49,8 +49,8 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
   const SCRIPT_URL =
-    "https://script.google.com/macros/s/AKfycbwuV7jpPBbsRCe_6Clke9jfkk32GStqyzaCve0jK1qlPcyfBNW3NG-GB7dE12UiZH7E/exec";
-  const SHEET_Id = "1-j3ydNhMDwa-SfvejOH15ow7ZZ10I1zwdV4acAirHe4";
+    "https://script.google.com/macros/s/AKfycbyhwtiwuHt7AChxyjQIhC7In30ke5Q247ZAd8DlZx4AfAHrNVetofkf2r4ThSPNJN3eeQ/exec";
+  const SHEET_Id = "1JHpW04BG2MOna3iEEfaMkN3tVFM3s3baAKLLT5iD6BM";
   const FOLDER_ID = "1IUX8rnhuodWWPQ2PPAFurz-S1Xoz-9h5";
 
   const fetchAllTasks = async () => {
